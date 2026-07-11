@@ -18,6 +18,10 @@ function getGroq() {
   return groq;
 }
 
+app.get("/", (_req, res) => {
+  res.status(200).send("Backend is awake!");
+});
+
 app.post("/api/chat", async (req, res) => {
   try {
     if (!process.env.GROQ_API_KEY) {
