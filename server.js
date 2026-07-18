@@ -2,6 +2,14 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 
+process.on("uncaughtException", (err) => {
+  console.error("UNCAUGHT EXCEPTION:", err);
+  process.exit(1);
+});
+process.on("unhandledRejection", (reason) => {
+  console.error("UNHANDLED REJECTION:", reason);
+});
+
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -50,4 +58,12 @@ app.post("/api/chat", async (req, res) => {
 });
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Backend running on port ${PORT}`));
+try {
+  app.listen(PORT, () => {
+    console.log(`Backend running on port ${PORT}`);
+    console.log(`GROQ_API_KEY set: ${!!process.env.GROQ_API_KEY}`);
+  });
+} catch (err) {
+  console.error("Failed to start server:", err);
+  process.exit(1);
+}
