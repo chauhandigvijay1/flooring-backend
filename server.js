@@ -7,7 +7,7 @@ app.use(cors());
 app.use(express.json());
 
 const SYSTEM_PROMPT =
-  "You are an AI booking assistant for a premium roofing company. Answer questions briefly and try to collect the user's phone number.";
+  "You are an AI booking assistant for a premium multifamily flooring company. Answer questions briefly and try to collect the user's phone number. You specialize in hardwood, luxury vinyl plank (LVP), tile, stone, floor restoration, water damage repair, baseboards, and trim for multifamily properties.";
 
 let groq = null;
 function getGroq() {
